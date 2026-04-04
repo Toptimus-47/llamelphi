@@ -38,3 +38,9 @@ backups/
 .env
 *.tmp
 node_modules/
+
+# Local Databases
+*.db
+*.db-journal
+vector_db/*
+!vector_db/.gitkeep
