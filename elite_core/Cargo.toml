@@ -1,0 +1,40 @@
+[package]
+name = "elite_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Async Runtime & Web Server
+tokio = { version = "1.36", features = ["full"] }
+tokio-stream = { version = "0.1", features = ["sync", "net"] }
+axum = { version = "0.7.4", features = ["json", "macros"] }
+tower-http = { version = "0.5.1", features = ["cors", "trace"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+futures = "0.3"
+anyhow = "1.0"
+reqwest = { version = "0.11", features = ["json", "stream"] }
+ndarray = "0.15"
+tokio-util = { version = "0.7", features = ["codec"] }
+
+# Removed native llama-cpp due to Windows build compatibility issues
+# Using Modular REST Inference (OAI compatible) for Business Logic stability
+
+# Python Compatibility (Optional legacy support)
+pyo3 = { version = "0.20", features = ["extension-module"] }
+regex = "1.12.3"
+candle-core = "0.10.2"
+candle-nn = "0.10.2"
+candle-transformers = "0.10.2"
+hf-hub = "0.5.0"
+tokenizers = "0.22.2"
+
+[lib]
+name = "elite_core"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "elite_server"
+path = "src/main.rs"

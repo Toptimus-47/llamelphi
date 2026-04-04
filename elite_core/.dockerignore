@@ -1,0 +1,13 @@
+target/
+.git/
+.github/
+.idea/
+.vscode/
+*.pyd
+*.log
+backups/
+vector_db/faiss_index.bin
+vector_db/metadata.json
+node_modules/
+dist/
+build/

@@ -1,0 +1,40 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+target/
+build/
+dist/
+*.exe
+*.dll
+*.pdb
+*.pyd
+*.so
+*.dylib
+*.log
+__pycache__/
+*.pyc
+
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Rust
+**/*.rs.bk
+Cargo.lock
+
+# Data & Models (Heavy files)
+models/*.gguf
+models/.cache/
+vector_db/*.bin
+vector_db/*.json
+
+# Backups & Private
+backups/
+.env
+*.tmp
+node_modules/
