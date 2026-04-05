@@ -32,7 +32,7 @@ async fn main() {
     // Modular Inference Endpoint (llama.cpp server or similar)
     let oai_base_url = "http://localhost:8080";
 
-    println!("Initializing ELITE Rust Core with Modular Inference at: {}", oai_base_url);
+    println!("Initializing llamelphi Rust Core with MAGI System at: {}", oai_base_url);
     
     let agent = AgentExecutor::new(oai_base_url);
     let state = Arc::new(AppState { agent });
@@ -45,7 +45,7 @@ async fn main() {
         .with_state(state);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
-    println!("ELITE Pure Rust BL Server listening on {}", addr);
+    println!("llamelphi Pure Rust MAGI Server listening on {}", addr);
     
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();

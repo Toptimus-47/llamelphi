@@ -1,5 +1,5 @@
 [package]
-name = "elite_core"
+name = "llamelphi_core"
 version = "0.1.0"
 edition = "2021"
 
@@ -32,9 +32,9 @@ hf-hub = "0.5.0"
 tokenizers = "0.22.2"
 
 [lib]
-name = "elite_core"
+name = "llamelphi_core"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
-name = "elite_server"
+name = "llamelphi_server"
 path = "src/main.rs"
