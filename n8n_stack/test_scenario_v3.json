@@ -1,0 +1,107 @@
+{
+  "name": "MAGI 2026 Full Integration Test (Scenario A/B)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/chat/stream",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "My name is John Doe (RRN: 900101-1234567). Explain the impact of PII masking on Clean Architecture."
+            },
+            {
+              "name": "session_id",
+              "value": "integration-test-v3-01"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2",
+      "name": "Test: PII Masking & Knowledge Retrieval",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8000/sessions/integration-test-v3-01/history",
+        "options": {}
+      },
+      "id": "3",
+      "name": "Verify: History & Masking",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"history\"].join(\" \")}}",
+              "operation": "notContains",
+              "value2": "John Doe"
+            },
+            {
+              "value1": "={{$json[\"history\"].join(\" \")}}",
+              "operation": "contains",
+              "value2": "[NAME_HIDDEN]"
+            }
+          ]
+        }
+      },
+      "id": "4",
+      "name": "Check: Data Integrity",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [700, 300]
+    }
+  ],
+  "connections": {
+    "1": {
+      "main": [
+        [
+          {
+            "node": "2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2": {
+      "main": [
+        [
+          {
+            "node": "3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3": {
+      "main": [
+        [
+          {
+            "node": "4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

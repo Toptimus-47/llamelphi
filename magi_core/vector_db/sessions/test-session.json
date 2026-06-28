@@ -1,0 +1,35 @@
+[
+  {
+    "id": "Melchior (Initial Draft):1780826142335849000",
+    "text": "Mock Unit Output",
+    "source": "Melchior (Initial Draft)",
+    "embedding": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "timestamp": 1780826142
+  },
+  {
+    "id": "Melchior (Refined Draft - Cycle 1):1780826142335891000",
+    "text": "Mock Unit Output",
+    "source": "Melchior (Refined Draft - Cycle 1)",
+    "embedding": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "timestamp": 1780826142
+  },
+  {
+    "id": "Melchior (Refined Draft - Cycle 2):1780826142335924700",
+    "text": "Mock Unit Output",
+    "source": "Melchior (Refined Draft - Cycle 2)",
+    "embedding": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "timestamp": 1780826142
+  }
+]

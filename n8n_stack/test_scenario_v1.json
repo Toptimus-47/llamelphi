@@ -1,0 +1,109 @@
+{
+  "name": "ELITE Rust Core Acceptance Test v1",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1",
+      "name": "When Clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:8000/sessions",
+        "options": {}
+      },
+      "id": "2",
+      "name": "Test: Session List",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/chat/stream",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "이미지 분석을 시작해줘."
+            },
+            {
+              "name": "session_id",
+              "value": "n8n-test-acc-01"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3",
+      "name": "Test: Chat Stream (Logic check)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/sessions/n8n-test-acc-01/feedback",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "rating",
+              "value": 1
+            },
+            {
+              "name": "comment",
+              "value": "n8n Automated Test Success."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4",
+      "name": "Test: Feedback API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "1": {
+      "main": [
+        [
+          {
+            "node": "2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2": {
+      "main": [
+        [
+          {
+            "node": "3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3": {
+      "main": [
+        [
+          {
+            "node": "4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

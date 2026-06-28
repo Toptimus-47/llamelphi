@@ -1,0 +1,68 @@
+{
+  "name": "ELITE Full-Stack Acceptance Test v2",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger",
+      "name": "Start Test",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/chat/stream",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "My email is test@test.com. Analyze the legal implications of AI copyright."
+            },
+            {
+              "name": "session_id",
+              "value": "acc-test-legal-pii"
+            }
+          ]
+        }
+      },
+      "id": "test_legal_pii",
+      "name": "Test: Legal + PII Masking",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [200, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.content}}",
+              "operation": "contains",
+              "value2": "[EMAIL_HIDDEN]"
+            },
+            {
+              "value1": "={{$json.content}}",
+              "operation": "contains",
+              "value2": "Legal Analysis"
+            }
+          ]
+        }
+      },
+      "id": "verify_result",
+      "name": "Verify: PII & Legal Domain",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [400, 0]
+    }
+  ],
+  "connections": {
+    "trigger": {
+      "main": [[{"node": "test_legal_pii", "type": "main", "index": 0}]]
+    },
+    "test_legal_pii": {
+      "main": [[{"node": "verify_result", "type": "main", "index": 0}]]
+    }
+  }
+}

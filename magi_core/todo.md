@@ -1,0 +1,6 @@
+- [ ] Add PDF generation tests and verify layout
+- [ ] Enhance PDF styling (headers, page numbers, custom fonts)
+- [ ] Integrate PDF export into CI pipeline
+- [ ] Document usage in README.md
+- [ ] Add Rustdoc examples for `export_requirements_to_pdf`
+- [ ] Provide optional CSV export for requirements

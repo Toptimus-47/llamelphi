@@ -38,9 +38,31 @@ backups/
 .env
 *.tmp
 node_modules/
+prompts/sensitive_condition_guidelines.md
+prompts/audit_guidelines.md
 
-# Local Databases
-*.db
-*.db-journal
+# Personal Data & Knowledge Base (Privacy Isolation)
+personal_data/
+logs/
+knowledge_*.md
+*.log
+session_data/
+test_data/
+sessions/*.log
+prompts/sensitive_*.txt
+
+# Data & Models (Heavy & Sensitive files)
+models/*.gguf
+models/.cache/
 vector_db/*
 !vector_db/.gitkeep
+
+# Legacy Documentation (Moved from archive)
+legacy/
+
+# Sled & Vector Databases
+magi_data.db/
+**/*.db/
+**/*_data.db/
+
+

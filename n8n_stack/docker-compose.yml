@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: elite_n8n_test_engine
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5678/
+      - N8N_DIAGNOSTICS_ENABLED=false
+    volumes:
+      - ./.n8n:/home/node/.n8n
+      - ../test_data:/home/node/test_data:ro # Vision 테스트용 데이터 공유 (읽기 전용)
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # 로컬 Rust 서버 접근용
